@@ -40,7 +40,7 @@ namespace realware
         {
         }
 
-        sSound* mSound::AddSound(const std::string& id, const std::string& filename, const game::Category& format)
+        sSound* mSound::CreateSound(const std::string& id, const std::string& filename, const game::Category& format)
         {
             u32 source = 0;
             u32 buffer = 0;
@@ -55,7 +55,7 @@ namespace realware
             return _sounds.Find(id);
         }
 
-        void mSound::DeleteSound(const std::string& id)
+        void mSound::DestroySound(const std::string& id)
         {
             _sounds.Delete(id);
         }

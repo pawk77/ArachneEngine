@@ -272,7 +272,7 @@ namespace realware
             memoryPool->Free(_opaqueInstances);
         }
 
-        sMaterial* mRender::AddMaterial(const std::string& id, const sTextureAtlasTexture* const diffuseTexture, const glm::vec4& diffuseColor, const glm::vec4& highlightColor, const Category& customShaderRenderPath, const std::string& customVertexFuncPath, const std::string& customFragmentFuncPath)
+        sMaterial* mRender::CreateMaterial(const std::string& id, const sTextureAtlasTexture* const diffuseTexture, const glm::vec4& diffuseColor, const glm::vec4& highlightColor, const Category& customShaderRenderPath, const std::string& customVertexFuncPath, const std::string& customFragmentFuncPath)
         {
             sShader* customShader = nullptr;
             if (customVertexFuncPath != "" || customFragmentFuncPath != "")
@@ -295,7 +295,7 @@ namespace realware
             return _materialsCPU.Find(id);
         }
 
-        void mRender::DeleteMaterial(const std::string& id)
+        void mRender::DestroyMaterial(const std::string& id)
         {
             sMaterial* const material = _materialsCPU.Find(id);
             if (material->CustomShader != nullptr)

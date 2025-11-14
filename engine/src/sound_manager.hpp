@@ -58,9 +58,9 @@ namespace realware
             mSound(const app::cApplication* const app, const iSoundContext* const context);
             ~mSound() = default;
 
-            sSound* AddSound(const std::string& id, const std::string& filename, const game::Category& format);
+            sSound* CreateSound(const std::string& id, const std::string& filename, const game::Category& format);
             sSound* FindSound(const std::string& id);
-            void DeleteSound(const std::string& id);
+            void DestroySound(const std::string& id);
 
         private:
             app::cApplication* _app = nullptr;

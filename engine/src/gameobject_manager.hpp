@@ -107,9 +107,9 @@ namespace realware
             explicit mGameObject(const app::cApplication* const app);
             ~mGameObject() = default;
 
-            cGameObject* AddGameObject(const std::string& id);
+            cGameObject* CreateGameObject(const std::string& id);
             cGameObject* FindGameObject(const std::string& id);
-            void DeleteGameObject(const std::string& id);
+            void DestroyGameObject(const std::string& id);
 
             inline utils::cIdVec<cGameObject>& GetObjects() { return _gameObjects; }
 

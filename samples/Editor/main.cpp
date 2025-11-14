@@ -151,7 +151,7 @@ public:
         //    plane->Indices
         //);
 
-        auto dirtTexture = textureManager->AddTexture("data/textures/dirt.png", "DirtTexture");
+        auto dirtTexture = textureManager->CreateTexture("data/textures/dirt.png", "DirtTexture");
         //m_taburetTexture = textureManager->AddTexture("data/textures/taburet2.png", "TaburetTexture");
 
         // Editor windows

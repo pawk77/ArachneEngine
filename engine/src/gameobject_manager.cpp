@@ -57,7 +57,7 @@ namespace realware
         void cGameObject::SetPhysicsActor(const Category& staticOrDynamic, const Category& shapeType, const sSimulationScene* const scene, const sSubstance* const substance, const f32 mass)
         {
             mPhysics* physics = App->GetPhysicsManager();
-            _actor = physics->AddActor(
+            _actor = physics->CreateActor(
                 GetID(),
                 staticOrDynamic,
                 shapeType,
@@ -73,7 +73,7 @@ namespace realware
         {
             mPhysics* physics = App->GetPhysicsManager();
 
-            _controller = physics->AddController(
+            _controller = physics->CreateController(
                 GetID(),
                 eyeHeight,
                 height,
@@ -90,7 +90,7 @@ namespace realware
         {
         }
 
-        cGameObject* mGameObject::AddGameObject(const std::string& id)
+        cGameObject* mGameObject::CreateGameObject(const std::string& id)
         {
             return _gameObjects.Add(id, _app->GetMemoryPool());
         }
@@ -100,7 +100,7 @@ namespace realware
             return _gameObjects.Find(id);
         }
 
-        void mGameObject::DeleteGameObject(const std::string& id)
+        void mGameObject::DestroyGameObject(const std::string& id)
         {
             _gameObjects.Delete(id);
         }

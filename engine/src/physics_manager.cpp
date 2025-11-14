@@ -73,7 +73,7 @@ namespace realware
             delete _allocator;
         }
 
-        sSimulationScene* mPhysics::AddScene(const std::string& id, const glm::vec3& gravity)
+        sSimulationScene* mPhysics::CreateScene(const std::string& id, const glm::vec3& gravity)
         {
             PxSceneDesc sceneDesc(_physics->getTolerancesScale());
             sceneDesc.gravity = PxVec3(gravity.y, gravity.x, gravity.z);
@@ -87,14 +87,14 @@ namespace realware
             return _scenes.Add(id, scene, controllerManager);
         }
 
-        sSubstance* mPhysics::AddSubstance(const std::string& id, const glm::vec3& params)
+        sSubstance* mPhysics::CreateSubstance(const std::string& id, const glm::vec3& params)
         {
             PxMaterial* material = _physics->createMaterial(params.x, params.y, params.z); // (staticFriction, dynamicFriction, restitution)
 
             return _substances.Add(id, material);
         }
 
-        sController* mPhysics::AddController(const std::string& id, const f32 eyeHeight, const f32 height, const f32 radius, const render::sTransform* const transform, const glm::vec3& up, const sSimulationScene* const scene, const sSubstance* const substance)
+        sController* mPhysics::CreateController(const std::string& id, const f32 eyeHeight, const f32 height, const f32 radius, const render::sTransform* const transform, const glm::vec3& up, const sSimulationScene* const scene, const sSubstance* const substance)
         {
             glm::vec3 position = transform->Position;
 
@@ -114,7 +114,7 @@ namespace realware
             return _controllers.Add(id, controller, eyeHeight);
         }
 
-        sActor* mPhysics::AddActor(const std::string& id, const Category& staticOrDynamic, const Category& shapeType, const sSimulationScene* const scene, const sSubstance* const substance, const f32 mass, const sTransform* const transform, const cGameObject* const gameObject)
+        sActor* mPhysics::CreateActor(const std::string& id, const Category& staticOrDynamic, const Category& shapeType, const sSimulationScene* const scene, const sSubstance* const substance, const f32 mass, const sTransform* const transform, const cGameObject* const gameObject)
         {
             glm::vec3 position = transform->Position;
             glm::vec3 scale = transform->Scale;
@@ -177,22 +177,22 @@ namespace realware
             return _controllers.Find(id);
         }
 
-        void mPhysics::DeleteScene(const std::string& id)
+        void mPhysics::DestroyScene(const std::string& id)
         {
             _scenes.Delete(id);
         }
 
-        void mPhysics::DeleteSubstance(const std::string& id)
+        void mPhysics::DestroySubstance(const std::string& id)
         {
             _substances.Delete(id);
         }
 
-        void mPhysics::DeleteActor(const std::string& id)
+        void mPhysics::DestroyActor(const std::string& id)
         {
             _actors.Delete(id);
         }
 
-        void mPhysics::DeleteController(const std::string& id)
+        void mPhysics::DestroyController(const std::string& id)
         {
             _controllers.Delete(id);
         }

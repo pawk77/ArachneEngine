@@ -156,9 +156,9 @@ namespace realware
             explicit mRender(const app::cApplication* const app, const iRenderContext* const context);
             ~mRender();
 
-            sMaterial* AddMaterial(const std::string& id, const render::sTextureAtlasTexture* const diffuseTexture, const glm::vec4& diffuseColor, const glm::vec4& highlightColor, const game::Category& customShaderRenderPath = game::Category::RENDER_PATH_OPAQUE, const std::string& customVertexFuncPath = "", const std::string& customFragmentFuncPath = "");
+            sMaterial* CreateMaterial(const std::string& id, const render::sTextureAtlasTexture* const diffuseTexture, const glm::vec4& diffuseColor, const glm::vec4& highlightColor, const game::Category& customShaderRenderPath = game::Category::RENDER_PATH_OPAQUE, const std::string& customVertexFuncPath = "", const std::string& customFragmentFuncPath = "");
             sMaterial* FindMaterial(const std::string& id);
-            void DeleteMaterial(const std::string& id);
+            void DestroyMaterial(const std::string& id);
             sVertexArray* CreateDefaultVertexArray();
             sVertexBufferGeometry* CreateGeometry(const game::Category& format, const types::usize verticesByteSize, const void* const vertices, const types::usize indicesByteSize, const void* const indices);
             void DestroyGeometry(sVertexBufferGeometry* geometry);

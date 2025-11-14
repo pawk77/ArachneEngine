@@ -44,7 +44,7 @@ namespace realware
             _context->DestroyTexture(_atlas);
         }
 
-        sTextureAtlasTexture* mTexture::AddTexture(const std::string& id, const glm::vec2& size, const usize channels, const u8* data)
+        sTextureAtlasTexture* mTexture::CreateTexture(const std::string& id, const glm::vec2& size, const usize channels, const u8* data)
         {
             const usize width = size.x;
             const usize height = size.y;
@@ -119,7 +119,7 @@ namespace realware
             return nullptr;
         }
 
-        sTextureAtlasTexture* mTexture::AddTexture(const std::string& id, const std::string& filename)
+        sTextureAtlasTexture* mTexture::CreateTexture(const std::string& id, const std::string& filename)
         {
             const usize channelsRequired = 4;
 
@@ -129,7 +129,7 @@ namespace realware
             u8* data = nullptr;
             data = stbi_load(filename.c_str(), &width, &height, &channels, channelsRequired);
 
-            return AddTexture(id, glm::vec2(width, height), channelsRequired, data);
+            return CreateTexture(id, glm::vec2(width, height), channelsRequired, data);
         }
 
         sTextureAtlasTexture* mTexture::FindTexture(const std::string& id)
@@ -137,7 +137,7 @@ namespace realware
             return _textures.Find(id);
         }
 
-        void mTexture::DeleteTexture(const std::string& id)
+        void mTexture::DestroyTexture(const std::string& id)
         {
             _textures.Delete(id);
         }

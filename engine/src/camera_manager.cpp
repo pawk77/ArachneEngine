@@ -27,7 +27,7 @@ namespace realware
         void mCamera::CreateCamera()
         {
             mGameObject* gameObjectManager = _app->GetGameObjectManager();
-            _cameraGameObject = gameObjectManager->AddGameObject(K_CAMERA_ID);
+            _cameraGameObject = gameObjectManager->CreateGameObject(K_CAMERA_ID);
             _cameraGameObject->SetVisible(K_FALSE);
             _cameraGameObject->SetOpaque(K_FALSE);
         }
@@ -35,7 +35,7 @@ namespace realware
         void mCamera::DestroyCamera()
         {
             mGameObject* gameObjectManager = _app->GetGameObjectManager();
-            gameObjectManager->DeleteGameObject(K_CAMERA_ID);
+            gameObjectManager->DestroyGameObject(K_CAMERA_ID);
         }
 
         void mCamera::Update()

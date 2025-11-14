@@ -135,18 +135,18 @@ namespace realware
             explicit mPhysics(const app::cApplication* const app);
             ~mPhysics();
 
-            sSimulationScene* AddScene(const std::string& id, const glm::vec3& gravity = glm::vec3(0.0f, -9.81f, 0.0f));
-            sSubstance* AddSubstance(const std::string& id, const glm::vec3& params = glm::vec3(0.5f, 0.5f, 0.6f));
-            sActor* AddActor(const std::string& id, const game::Category& staticOrDynamic, const game::Category& shapeType, const sSimulationScene* const scene, const sSubstance* const substance, const types::f32 mass, const render::sTransform* const transform, const game::cGameObject* const gameObject);
-            sController* AddController(const std::string& id, const types::f32 eyeHeight, const types::f32 height, const types::f32 radius, const render::sTransform* const transform, const glm::vec3& up, const sSimulationScene* const scene, const sSubstance* const substance);
+            sSimulationScene* CreateScene(const std::string& id, const glm::vec3& gravity = glm::vec3(0.0f, -9.81f, 0.0f));
+            sSubstance* CreateSubstance(const std::string& id, const glm::vec3& params = glm::vec3(0.5f, 0.5f, 0.6f));
+            sActor* CreateActor(const std::string& id, const game::Category& staticOrDynamic, const game::Category& shapeType, const sSimulationScene* const scene, const sSubstance* const substance, const types::f32 mass, const render::sTransform* const transform, const game::cGameObject* const gameObject);
+            sController* CreateController(const std::string& id, const types::f32 eyeHeight, const types::f32 height, const types::f32 radius, const render::sTransform* const transform, const glm::vec3& up, const sSimulationScene* const scene, const sSubstance* const substance);
             sSimulationScene* FindScene(const std::string&);
             sSubstance* FindSubstance(const std::string&);
             sActor* FindActor(const std::string&);
             sController* FindController(const std::string&);
-            void DeleteScene(const std::string& id);
-            void DeleteSubstance(const std::string& id);
-            void DeleteActor(const std::string& id);
-            void DeleteController(const std::string& id);
+            void DestroyScene(const std::string& id);
+            void DestroySubstance(const std::string& id);
+            void DestroyActor(const std::string& id);
+            void DestroyController(const std::string& id);
 
             void MoveController(const sController* const controller, const glm::vec3& position, const types::f32 minStep = 0.001f);
             glm::vec3 GetControllerPosition(const sController* const controller);
