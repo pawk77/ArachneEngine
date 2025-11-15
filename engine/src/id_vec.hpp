@@ -56,7 +56,7 @@ namespace realware
 		template<typename... Args>
 		T* cIdVec<T>::Add(const std::string& id, Args&&... args)
 		{
-			if (_objectCount > _maxObjectCount)
+			if (_objectCount >= _maxObjectCount)
 			{
 				log::Print("Error: object count limit '" + std::to_string(_maxObjectCount) + "' exceeded!");
 
@@ -75,7 +75,7 @@ namespace realware
 		template<typename T>
 		T* cIdVec<T>::Add(const T& object)
 		{
-			if (_objectCount > _maxObjectCount)
+			if (_objectCount >= _maxObjectCount)
 			{
 				log::Print("Error: object count limit '" + std::to_string(_maxObjectCount) + "' exceeded!");
 
