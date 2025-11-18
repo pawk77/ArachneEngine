@@ -31,11 +31,28 @@ namespace realware
         {
             event._receiver = (cGameObject*)receiver;
 
-            eEventType eventType = event.GetType();
+            const eEventType eventType = event.GetType();
             auto listener = _listeners.find(eventType);
             if (listener == _listeners.end())
                 _listeners.insert({ eventType, {}});
             _listeners[eventType].push_back(event);
+        }
+
+        void mEventManager::Unsubscribe(const cGameObject* receiver, cEvent& event)
+        {
+            if (_listeners.find(event.GetType()) == _listeners.end())
+                return;
+
+            const eEventType eventType = event.GetType();
+            auto& events = _listeners[eventType];
+            for (auto it = events.begin(); it != events.end();)
+            {
+                if (it->GetReceiver() == receiver)
+                {
+                    events.erase(it);
+                    return;
+                }
+            }
         }
 
         void mEventManager::Send(const eEventType& type)

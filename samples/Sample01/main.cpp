@@ -235,9 +235,17 @@ public:
         textObject->SetMaterial(material1);
         textObject->SetText(text);
         
+        cEvent e = cEvent(eEventType::KEY_PRESS, [](sEventData* const data) { std::cout << "Key press!" << std::endl; });
         GetEventManager()->Subscribe(
             textObject,
-            cEvent(eEventType::KEY_PRESS, [](sEventData* const data) { std::cout << "Key press!" << std::endl; })
+            e
+        );
+        GetEventManager()->Send(
+            eEventType::KEY_PRESS
+        );
+        GetEventManager()->Unsubscribe(
+            textObject,
+            e
         );
         GetEventManager()->Send(
             eEventType::KEY_PRESS

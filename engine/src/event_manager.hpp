@@ -61,6 +61,7 @@ namespace realware
             ~mEventManager() = default;
             
             void Subscribe(const game::cGameObject* receiver, cEvent& event);
+            void Unsubscribe(const game::cGameObject* receiver, cEvent& event);
             void Send(const eEventType& type);
             void Send(const eEventType& type, sEventData* const data);
 
