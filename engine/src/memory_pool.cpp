@@ -9,18 +9,12 @@ using namespace types;
 
 namespace realware
 {
-    cMemoryPool::cMemoryPool(cContext* context, usize byteSize, usize allocs, usize alignment) : iObject(context)
+    cMemoryPool::cMemoryPool(cContext* context) : iObject(context)
     {
         if (alignment == 0)
             _memory = malloc(byteSize);
         else
             _memory = _aligned_malloc(byteSize, alignment);
-
-        _byteSize = byteSize;
-        _lastAddress = _memory;
-        _maxAddress = (void*)(((usize)_memory) + byteSize);
-        _allocs.reserve(allocs);
-        _alignment = alignment;
     }
 
     cMemoryPool::~cMemoryPool()
