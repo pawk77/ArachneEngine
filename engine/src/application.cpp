@@ -75,8 +75,10 @@ namespace realware
             app->SetMouseKey(button, 1);
     }
 
-    cApplication::cApplication(const sApplicationDescriptor* desc) : _desc(*desc)
+    cApplication::cApplication(cContext* context) : iObject(context)
     {
+        _engine = std::make_shared<cEngine>(_context);
+
         CreateMemoryPool();
         CreateAppWindow();
         CreateContexts();
@@ -93,6 +95,8 @@ namespace realware
 
     void cApplication::Run()
     {
+        _engine->Initialize();
+
         Start();
 
         _timepointLast = std::chrono::high_resolution_clock::now();

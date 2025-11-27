@@ -8,6 +8,7 @@
 #include <windows.h>
 #include <chrono>
 #include "object.hpp"
+#include "engine.hpp"
 #include "../../thirdparty/glm/glm/glm.hpp"
 #include "types.hpp"
 
@@ -64,8 +65,10 @@ namespace realware
         types::u32 _maxVectorElementCount = 65536;
     };
 
-    class cApplication
+    class cApplication : public iObject
     {
+        REALWARE_CLASS(cApplication)
+
         friend void KeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
         friend void WindowFocusCallback(GLFWwindow* window, int focused);
         friend void WindowSizeCallback(GLFWwindow* window, int width, int height);
@@ -80,7 +83,7 @@ namespace realware
             MIDDLE
         };
 
-        explicit cApplication(const sApplicationDescriptor* desc);
+        explicit cApplication(cContext* context);
         ~cApplication();
 
         virtual void Start() = 0;
@@ -155,5 +158,7 @@ namespace realware
         std::chrono::steady_clock::time_point _timepointLast;
         types::boolean _isFocused = types::K_FALSE;
         glm::vec2 _cursorPosition = glm::vec2(0.0f);
+        
+        std::shared_ptr<cEngine> _engine;
     };
 }
