@@ -31,6 +31,32 @@ namespace realware
     class cEngine;
     struct sEngineCapabilities;
 
+    class cWindow : public cFactoryObject
+    {
+        REALWARE_CLASS(cWindow)
+
+        friend void WindowSizeCallback(GLFWwindow* window, int width, int height);
+
+    public:
+        explicit cWindow(cContext* context, const std::string& title, types::usize width, types::usize height, types::boolean fullscreen);
+        virtual ~cWindow() override final = default;
+
+        types::boolean GetRunState() const;
+        HWND GetWin32Window() const;
+        inline GLFWwindow* GetWindow() const { return _window; }
+        inline const std::string& GetTitle() const { return _title; }
+        inline glm::vec2 GetSize() const { return glm::vec2(_width, _height); }
+        inline types::usize GetWidth() const { return _width; }
+        inline types::usize GetHeight() const { return _height; }
+
+    private:
+        GLFWwindow* _window = nullptr;
+        std::string _title = "";
+        types::usize _width = 0;
+        types::usize _height = 0;
+        types::boolean _fullscreen = types::K_FALSE;
+    };
+
     class iApplication : public iObject
     {
         REALWARE_CLASS(iApplication)
