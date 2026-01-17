@@ -13,6 +13,7 @@
 #include "render_manager.hpp"
 #include "memory_pool.hpp"
 #include "context.hpp"
+#include "engine.hpp"
 #include "log.hpp"
 
 using namespace types;
@@ -659,9 +660,10 @@ namespace realware
 
         if (texture->GetDimension() == cTexture::eDimension::TEXTURE_2D)
         {
+            const sEngineCapabilities* caps = _context->GetSubsystem<cEngine>()->GetCapabilities();
             cMemoryAllocator* memoryAllocator = _context->GetMemoryAllocator();
 
-            u8* pixels = (u8*)memoryAllocator->Allocate(texture->GetWidth() * texture->GetHeight() * formatByteCount, 64);
+            u8* pixels = (u8*)memoryAllocator->Allocate(texture->GetWidth() * texture->GetHeight() * formatByteCount, caps->memoryAlignment);
 
             glBindTexture(GL_TEXTURE_2D, texture->_instance);
             glGetTexImage(GL_TEXTURE_2D, 0, channelsGL, formatComponentGL, pixels);

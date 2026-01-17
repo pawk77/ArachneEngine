@@ -4,6 +4,7 @@
 #include "audio.hpp"
 #include "context.hpp"
 #include "sound_context.hpp"
+#include "engine.hpp"
 #include "log.hpp"
 
 using namespace types;
@@ -28,6 +29,7 @@ namespace realware
 
 	void cSound::Load(eType type, const std::string& path)
 	{
+		const sEngineCapabilities* caps = _context->GetSubsystem<cEngine>()->GetCapabilities();
 		cMemoryAllocator* memoryAllocator = _context->GetMemoryAllocator();
 
 		sWAVStructure wav = {};
@@ -68,7 +70,7 @@ namespace realware
 			// Data
 			const int numSamples = wav._subchunk2Size / (_channelCount * (_bitsPerSample / 8));
 			_dataByteSize = numSamples * (_bitsPerSample / 8) * _channelCount;
-			_data = (u16*)memoryAllocator->Allocate(_dataByteSize, 64);
+			_data = (u16*)memoryAllocator->Allocate(_dataByteSize, caps->memoryAlignment);
 			if (_bitsPerSample == 16 && _channelCount == 2)
 			{
 				for (usize i = 0; i < numSamples; i++)

@@ -9,6 +9,7 @@
 #include "filesystem_manager.hpp"
 #include "memory_pool.hpp"
 #include "buffer.hpp"
+#include "engine.hpp"
 
 using namespace types;
 
@@ -27,6 +28,7 @@ namespace realware
 
     void cDataFile::Open(const std::string& path, types::boolean isText)
     {
+        const sEngineCapabilities* caps = _context->GetSubsystem<cEngine>()->GetCapabilities();
         auto memoryAllocator = _context->GetMemoryAllocator();
 
         if (_data)
@@ -39,7 +41,7 @@ namespace realware
         inputFile.seekg(0, std::ios::beg);
         const usize databyteSize = byteSize + (isText == K_TRUE ? 1 : 0);
 
-        _data = (cDataBuffer*)memoryAllocator->Allocate(sizeof(cDataBuffer), 64);
+        _data = (cDataBuffer*)memoryAllocator->Allocate(sizeof(cDataBuffer), caps->memoryAlignment);
         memset(_data, 0, databyteSize);
         inputFile.read((char*)&_data[0], byteSize);
     }

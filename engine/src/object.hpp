@@ -6,6 +6,7 @@
 #include "log.hpp"
 #include "event_types.hpp"
 #include "memory_pool.hpp"
+#include "engine.hpp"
 #include "types.hpp"
 
 namespace realware
@@ -116,10 +117,11 @@ namespace realware
 			return nullptr;
 		}
 		
+		const sEngineCapabilities* caps = _context->GetSubsystem<cEngine>()->GetCapabilities();
 		cMemoryAllocator* memoryAllocator = _context->GetMemoryAllocator();
 
 		const types::usize objectByteSize = sizeof(T);
-		T* object = (T*)memoryAllocator->Allocate(objectByteSize, 64);
+		T* object = (T*)memoryAllocator->Allocate(objectByteSize, caps->memoryAlignment);
 		new (object) T(std::forward<Args>(args)...);
 		
 		const std::string id = object->GetType() + std::to_string(_counter++);

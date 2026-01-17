@@ -8,6 +8,7 @@
 #include "context.hpp"
 #include "graphics.hpp"
 #include "input.hpp"
+#include "engine.hpp"
 #include "log.hpp"
 
 using namespace types;
@@ -47,6 +48,7 @@ namespace realware
 
     void cFontFace::FillAlphabetAndFindAtlasSize(usize& xOffset, usize& atlasWidth, usize& atlasHeight)
     {
+        const sEngineCapabilities* caps = _context->GetSubsystem<cEngine>()->GetCapabilities();
         cMemoryAllocator* memoryAllocator = _context->GetMemoryAllocator();
 
         const FT_Face ftFont = _font;
@@ -72,7 +74,7 @@ namespace realware
                 glyph._top = ftFont->glyph->bitmap_top;
                 glyph._advanceX = ftFont->glyph->advance.x >> 6;
                 glyph._advanceY = ftFont->glyph->advance.y >> 6;
-                glyph._bitmapData = memoryAllocator->Allocate(glyph._width * glyph._height, 64);
+                glyph._bitmapData = memoryAllocator->Allocate(glyph._width * glyph._height, caps->memoryAlignment);
 
                 if (ftFont->glyph->bitmap.buffer)
                     memcpy(glyph._bitmapData, ftFont->glyph->bitmap.buffer, glyph._width * glyph._height);
@@ -102,12 +104,13 @@ namespace realware
 
     void cFontFace::FillAtlasWithGlyphs(usize& atlasWidth, usize& atlasHeight)
     {
+        const sEngineCapabilities* caps = _context->GetSubsystem<cEngine>()->GetCapabilities();
         cMemoryAllocator* memoryAllocator = _context->GetMemoryAllocator();
         iGraphicsAPI* gfx = _context->GetSubsystem<cGraphics>()->GetAPI();
 
         usize maxGlyphHeight = 0;
 
-        void* atlasPixels = memoryAllocator->Allocate(atlasWidth * atlasHeight, 64);
+        void* atlasPixels = memoryAllocator->Allocate(atlasWidth * atlasHeight, caps->memoryAlignment);
         memset(atlasPixels, 0, atlasWidth * atlasHeight);
 
         usize xOffset = 0;
