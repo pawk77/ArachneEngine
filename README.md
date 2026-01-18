@@ -1,4 +1,4 @@
-# GhostWare
+# Gravebird Engine
 
 Lightweight C++11 game engine.
 
