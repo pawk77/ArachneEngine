@@ -29,9 +29,9 @@ namespace harpy
         alcCloseDevice(_device);
     }
 
-    void cOpenALSoundAPI::Create(cSound::eFormat type, cSound* sound)
+    void cOpenALSoundAPI::Create(cSound* sound)
     {
-        if (type == cSound::eFormat::WAV)
+        if (sound->GetFormat() == cSound::eFormat::WAV)
         {
             ALuint source = 0;
             ALuint buffer = 0;
@@ -89,9 +89,6 @@ namespace harpy
         u32 source = sound->GetSource();
         alDeleteBuffers(1, (ALuint*)&buffer);
         alDeleteSources(1, (ALuint*)&source);
-
-        sound->~cSound();
-        _app->GetMemoryPool()->Free(sound);
     }
 
     void cOpenALSoundAPI::Play(const cSound* sound)

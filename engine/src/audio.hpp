@@ -10,6 +10,7 @@ namespace harpy
 {
 	class cContext;
 	class iSoundAPI;
+	class cOpenALSoundAPI;
 
 	struct sWAVStructure
 	{
@@ -33,6 +34,8 @@ namespace harpy
 	{
 		REALWARE_OBJECT(cSound)
 
+		friend class cOpenALSoundAPI;
+
 	public:
 		enum class eFormat
 		{
@@ -41,10 +44,8 @@ namespace harpy
 		};
 
 	public:
-		explicit cSound(cContext* context);
+		explicit cSound(cContext* context, eFormat format, const std::string& path);
 		virtual ~cSound() override final;
-
-		void Load(eFormat type, const std::string& path);
 
 		inline eFormat GetFormat() const { return _format; }
 		inline types::u16 GetChannelCount() const { return _channelCount; }
@@ -54,10 +55,13 @@ namespace harpy
 		inline types::usize GetDataByteSize() const { return _dataByteSize; }
 		inline types::u32 GetSource() const { return _source; }
 		inline types::u32 GetBuffer() const { return _buffer; }
+		
+	private:
 		inline void SetSource(types::u32 source) { _source = source; }
 		inline void SetBuffer(types::u32 buffer) { _buffer = buffer; }
 
 	private:
+		iSoundAPI* _audioBackend = nullptr;
 		eFormat _format = eFormat::NONE;
 		types::u16 _channelCount = 0;
 		types::u16 _bitsPerSample = 0;
@@ -83,7 +87,7 @@ namespace harpy
 		explicit cAudio(cContext* context);
 		virtual ~cAudio() override final;
 
-		cSound* CreateSound(const std::string& id, const std::string& path, eCategory format);
+		cSound* CreateSound(const std::string& id, cSound::eFormat format, const std::string& path);
 		cSound* FindSound(const std::string& id);
 		void DestroySound(const std::string& id);
 
@@ -91,7 +95,8 @@ namespace harpy
 		void SetAPI(API api);
 
 	private:
+		API _audioBackendAPI = API::NONE;
 		iSoundAPI* _audioBackend = nullptr;
-		cIdVector<cSound> _sounds;
+		cIdVector<cSound>* _sounds;
 	};
 }

@@ -22,6 +22,7 @@ namespace harpy
 		types::usize maxPhysicsMaterialCount = 256;
 		types::usize maxPhysicsActorCount = 8192;
 		types::usize maxPhysicsControllerCount = 8;
+		types::usize maxSoundCount = 65536;
 	};
 
 	class cEngine : public cObject

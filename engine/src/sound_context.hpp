@@ -26,7 +26,7 @@ namespace harpy
         explicit iSoundAPI(cContext* context) : cObject(context) {}
         virtual ~iSoundAPI() = default;
 
-        virtual void Create(cSound::eFormat type, cSound* sound) = 0;
+        virtual void Create(cSound* sound) = 0;
         virtual void Destroy(cSound* sound) = 0;
         virtual void Play(const cSound* sound) = 0;
         virtual void Stop(const cSound* sound) = 0;
@@ -42,10 +42,10 @@ namespace harpy
         REALWARE_OBJECT(cOpenALSoundAPI)
 
     public:
-        cOpenALSoundAPI(cContext* context);
+        explicit cOpenALSoundAPI(cContext* context);
         virtual ~cOpenALSoundAPI() override final;
 
-        virtual void Create(cSound::eFormat type, cSound* sound) override final;
+        virtual void Create(cSound* sound) override final;
         virtual void Destroy(cSound* sound) override final;
         virtual void Play(const cSound* sound) override final;
         virtual void Stop(const cSound* sound) override final;
