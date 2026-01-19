@@ -12,7 +12,7 @@ namespace harpy
 	class cContext;
 
 	template <typename T>
-	class cIdVector : public cObject
+	class cIdVector : public iObject
 	{
 		REALWARE_OBJECT(cIdVector)
 
@@ -40,7 +40,7 @@ namespace harpy
 	};
 
 	template <typename T>
-	cIdVector<T>::cIdVector(cContext* context, types::usize maxElementCount) : cObject(context)
+	cIdVector<T>::cIdVector(cContext* context, types::usize maxElementCount) : iObject(context)
 	{
 		_maxElementCount = maxElementCount;
 		_indexCount = 0;

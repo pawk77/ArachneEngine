@@ -10,7 +10,7 @@
 
 namespace harpy
 {
-	class cTime : public cObject
+	class cTime : public iObject
 	{
 		REALWARE_OBJECT(cTime)
 

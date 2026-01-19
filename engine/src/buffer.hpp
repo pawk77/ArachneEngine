@@ -7,7 +7,7 @@
 
 namespace harpy
 {
-    class cDataBuffer : public cObject
+    class cDataBuffer : public iObject
     {
         REALWARE_OBJECT(cDataBuffer)
 

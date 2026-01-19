@@ -14,7 +14,7 @@ namespace harpy
     class cApplication;
     class cTextureAtlasTexture;
 
-    class cGPUResource : public cObject
+    class cGPUResource : public iObject
     {
         REALWARE_OBJECT(cGPUResource)
         
@@ -165,7 +165,7 @@ namespace harpy
         eFactor _dstFactors[8] = { eFactor::ZERO };
     };
 
-    class cRenderPass : public cObject
+    class cRenderPass : public iObject
     {
         REALWARE_OBJECT(cRenderPass)
 
@@ -198,12 +198,12 @@ namespace harpy
         sDescriptor _desc;
     };
 
-    class iGraphicsAPI : public cObject
+    class iGraphicsAPI : public iObject
     {
         REALWARE_OBJECT(iGraphicsAPI)
 
     public:
-        explicit iGraphicsAPI(cContext* context) : cObject(context) {}
+        explicit iGraphicsAPI(cContext* context) : iObject(context) {}
         virtual ~iGraphicsAPI() = default;
 
         virtual cBuffer* CreateBuffer(types::usize byteSize, cBuffer::eType type, const void* data) = 0;

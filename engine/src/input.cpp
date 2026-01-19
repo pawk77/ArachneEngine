@@ -71,7 +71,7 @@ namespace harpy
             input->SetMouseKey(button, 1);
     }
 
-    cInput::cInput(cContext* context) : cObject(context)
+    cInput::cInput(cContext* context) : iObject(context)
     {
         if (_initialized == types::K_FALSE)
         {

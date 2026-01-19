@@ -35,7 +35,7 @@ namespace harpy
     }
 
     cPhysics::cPhysics(cContext* context) :
-        cObject(context),
+        iObject(context),
         _allocator(new cPhysicsAllocator()),
         _error(new cPhysicsError()),
         _cpuDispatcher(new cPhysicsCPUDispatcher()),

@@ -27,7 +27,7 @@ using namespace types;
 
 namespace harpy
 {
-    cWindow::cWindow(cContext* context, const std::string& title, types::usize width, types::usize height, types::boolean fullscreen) : cObject(context), _title(title), _fullscreen(fullscreen)
+    cWindow::cWindow(cContext* context, const std::string& title, types::usize width, types::usize height, types::boolean fullscreen) : iObject(context), _title(title), _fullscreen(fullscreen)
     {
         cInput* input = context->GetSubsystem<cInput>();
 
@@ -81,7 +81,7 @@ namespace harpy
         return glfwGetWin32Window(_window);
     }
 
-    iApplication::iApplication(cContext* context, const sEngineCapabilities* capabilities) : cObject(context)
+    iApplication::iApplication(cContext* context, const sEngineCapabilities* capabilities) : iObject(context)
     {
         _engine = _context->Create<cEngine>(_context, capabilities, this);
         _window = _context->Create<cWindow>(_context, capabilities->windowTitle, capabilities->windowWidth, capabilities->windowHeight, capabilities->fullscreen);

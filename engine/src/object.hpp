@@ -17,7 +17,10 @@ namespace harpy
 	using ClassType = std::string;
 
 	#define REALWARE_OBJECT(typeName) \
-		public: static ClassType GetType() { return #typeName; }
+		public: \
+			virtual ClassType GetType() const override final { return GetTypeStatic(); } \
+		private: \
+			static ClassType GetTypeStatic() { return #typeName; }
 
 	class cIdentifier
 	{
@@ -34,16 +37,18 @@ namespace harpy
 		ID _id = "";
 	};
 
-	class cObject
+	class iObject
 	{
 		friend class cMemoryAllocator;
 
 	public:
-		explicit cObject(cContext* context) : _context(context) {}
-		virtual ~cObject() = default;
+		explicit iObject(cContext* context) : _context(context) {}
+		virtual ~iObject() = default;
 
-		cObject(const cObject& rhs) = delete;
-		cObject& operator=(const cObject& rhs) = delete;
+		iObject(const iObject& rhs) = delete;
+		iObject& operator=(const iObject& rhs) = delete;
+
+		virtual ClassType GetType() = 0;
 
 		void Subscribe(const std::string& id, eEventType type);
 		void Unsubscribe(eEventType type, cGameObject* receiver);

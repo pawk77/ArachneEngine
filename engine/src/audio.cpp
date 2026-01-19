@@ -11,7 +11,7 @@ using namespace types;
 
 namespace harpy
 {
-	cSound::cSound(cContext* context, eFormat format, const std::string& path) : cObject(context), _audioBackend(context->GetSubsystem<cAudio>()->GetAPI())
+	cSound::cSound(cContext* context, eFormat format, const std::string& path) : iObject(context), _audioBackend(context->GetSubsystem<cAudio>()->GetAPI())
 	{
 		const sEngineCapabilities* caps = _context->GetSubsystem<cEngine>()->GetCapabilities();
 		cMemoryAllocator* memoryAllocator = _context->GetMemoryAllocator();
@@ -81,7 +81,7 @@ namespace harpy
 		_audioBackend->Destroy(this);
 	}
 
-	cAudio::cAudio(cContext* context) : cObject(context)
+	cAudio::cAudio(cContext* context) : iObject(context)
 	{
 		const sEngineCapabilities* capabilities = context->GetSubsystem<cEngine>()->GetCapabilities();
 		_sounds = _context->Create<cIdVector<cSound>>(_context, capabilities->maxSoundCount);

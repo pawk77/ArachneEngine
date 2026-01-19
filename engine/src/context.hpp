@@ -28,7 +28,7 @@ namespace harpy
 		template <typename T>
 		void RegisterFactory();
 
-		void RegisterSubsystem(cObject* object);
+		void RegisterSubsystem(iObject* object);
 
 		inline cMemoryAllocator* GetMemoryAllocator() const { return _allocator; }
 
@@ -40,8 +40,8 @@ namespace harpy
 
 	private:
 		cMemoryAllocator* _allocator = nullptr;
-		std::unordered_map<ClassType, std::shared_ptr<cObject>> _factories;
-		std::unordered_map<ClassType, std::shared_ptr<cObject>> _subsystems;
+		std::unordered_map<ClassType, std::shared_ptr<iObject>> _factories;
+		std::unordered_map<ClassType, std::shared_ptr<iObject>> _subsystems;
 	};
 
 	template <typename T, typename... Args>
@@ -70,7 +70,7 @@ namespace harpy
 		const ClassType type = T::GetType();
 		const auto it = _factories.find(type);
 		if (it == _factories.end())
-			_factories.insert({type, std::make_shared<cObject>(this)});
+			_factories.insert({type, std::make_shared<iObject>(this)});
 	}
 
 	template <typename T>

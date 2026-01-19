@@ -9,7 +9,7 @@ namespace harpy
 {
     class cDataBuffer;
 
-    class cDataFile : public cObject
+    class cDataFile : public iObject
     {
         REALWARE_OBJECT(cDataFile)
 
@@ -25,7 +25,7 @@ namespace harpy
         cDataBuffer* _data = nullptr;
     };
 
-    class cFileSystem : public cObject
+    class cFileSystem : public iObject
     {
         REALWARE_OBJECT(cFileSystem)
 

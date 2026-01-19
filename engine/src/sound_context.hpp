@@ -18,12 +18,12 @@ namespace harpy
     class cSound;
     struct sWAVStructure;
 
-    class iSoundAPI : public cObject
+    class iSoundAPI : public iObject
     {
         REALWARE_OBJECT(iSoundAPI)
 
     public:
-        explicit iSoundAPI(cContext* context) : cObject(context) {}
+        explicit iSoundAPI(cContext* context) : iObject(context) {}
         virtual ~iSoundAPI() = default;
 
         virtual void Create(cSound* sound) = 0;

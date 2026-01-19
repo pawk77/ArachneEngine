@@ -18,7 +18,7 @@ namespace harpy
         _function->operator()(data);
     };
 
-    cEventDispatcher::cEventDispatcher(cContext* context) : cObject(context) {}
+    cEventDispatcher::cEventDispatcher(cContext* context) : iObject(context) {}
 
     void cEventDispatcher::Subscribe(const std::string& id, eEventType type)
     {

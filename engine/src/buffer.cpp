@@ -6,7 +6,7 @@
 
 namespace harpy
 {
-    cDataBuffer::cDataBuffer(cContext* context) : cObject(context) {}
+    cDataBuffer::cDataBuffer(cContext* context) : iObject(context) {}
 
     cDataBuffer::~cDataBuffer()
     {

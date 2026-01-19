@@ -16,7 +16,7 @@ namespace harpy
     class cApplication;
     class cTexture;
 
-    class cTextureAtlasTexture : public cObject
+    class cTextureAtlasTexture : public iObject
     {
         REALWARE_OBJECT(cTextureAtlasTexture)
 
@@ -40,7 +40,7 @@ namespace harpy
         types::f32 _textureLayerInfo = 0.0f;
     };
 
-    class cTextureAtlas : public cObject
+    class cTextureAtlas : public iObject
     {
         REALWARE_OBJECT(cTextureAtlas)
 

@@ -30,7 +30,7 @@ namespace harpy
 		types::u32 _numSamples = 0;
 	};
 
-	class cSound : public cObject
+	class cSound : public iObject
 	{
 		REALWARE_OBJECT(cSound)
 
@@ -72,7 +72,7 @@ namespace harpy
 		types::u32 _buffer = 0;
 	};
 
-	class cAudio : public cObject
+	class cAudio : public iObject
 	{
 		REALWARE_OBJECT(cAudio)
 

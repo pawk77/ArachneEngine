@@ -4,7 +4,7 @@
 
 namespace harpy
 {
-	cTime::cTime(cContext* context) : cObject(context) {}
+	cTime::cTime(cContext* context) : iObject(context) {}
 
 	void cTime::BeginFrame()
 	{

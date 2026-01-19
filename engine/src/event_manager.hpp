@@ -38,7 +38,7 @@ namespace harpy
         mutable std::shared_ptr<EventFunction> _function;
     };
 
-    class cEventDispatcher : public cObject
+    class cEventDispatcher : public iObject
     {
         REALWARE_OBJECT(cEventDispatcher)
 

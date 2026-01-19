@@ -34,7 +34,7 @@ namespace harpy
         std::shared_ptr<TaskFunction> _function;
     };
 
-    class cThread : public cObject
+    class cThread : public iObject
     {
         REALWARE_OBJECT(cThread)
 

@@ -21,7 +21,7 @@ namespace harpy
             _function->operator()(_data);
     }
 
-    cThread::cThread(cContext* context, usize threadCount) : cObject(context), _stop(K_FALSE)
+    cThread::cThread(cContext* context, usize threadCount) : iObject(context), _stop(K_FALSE)
     {
         for (usize i = 0; i < threadCount; ++i)
         {

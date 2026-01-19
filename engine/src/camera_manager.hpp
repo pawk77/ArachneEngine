@@ -11,7 +11,7 @@ namespace harpy
 {
     struct sTransform;
 
-    class cCamera : public cObject
+    class cCamera : public iObject
     {
         REALWARE_OBJECT(cCamera)
 

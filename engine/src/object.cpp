@@ -8,30 +8,30 @@ namespace harpy
 {
 	cIdentifier::cIdentifier(const std::string& id) : _id(id) {}
 
-    cObject::~cObject()
+    iObject::~iObject()
     {
         delete _identifier;
     }
 
-    void cObject::Subscribe(const std::string& id, eEventType type)
+    void iObject::Subscribe(const std::string& id, eEventType type)
     {
         cEventDispatcher* dispatcher = _context->GetSubsystem<cEventDispatcher>();
         dispatcher->Subscribe(id, type);
     }
 
-    void cObject::Unsubscribe(eEventType type, cGameObject* receiver)
+    void iObject::Unsubscribe(eEventType type, cGameObject* receiver)
     {
         cEventDispatcher* dispatcher = _context->GetSubsystem<cEventDispatcher>();
         dispatcher->Unsubscribe(type, receiver);
     }
 
-    void cObject::Send(eEventType type)
+    void iObject::Send(eEventType type)
     {
         cEventDispatcher* dispatcher = _context->GetSubsystem<cEventDispatcher>();
         dispatcher->Send(type);
     }
 
-    void cObject::Send(eEventType type, cDataBuffer* data)
+    void iObject::Send(eEventType type, cDataBuffer* data)
     {
         cEventDispatcher* dispatcher = _context->GetSubsystem<cEventDispatcher>();
         dispatcher->Send(type, data);

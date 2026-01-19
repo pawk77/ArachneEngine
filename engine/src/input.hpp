@@ -14,7 +14,7 @@ namespace harpy
 {
 	class cContext;
 
-	class cInput : public cObject
+	class cInput : public iObject
 	{
         REALWARE_OBJECT(cInput)
 

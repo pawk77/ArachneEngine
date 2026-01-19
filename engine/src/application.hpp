@@ -31,7 +31,7 @@ namespace harpy
     class cEngine;
     struct sEngineCapabilities;
 
-    class cWindow : public cObject
+    class cWindow : public iObject
     {
         REALWARE_OBJECT(cWindow)
 
@@ -57,7 +57,7 @@ namespace harpy
         types::boolean _fullscreen = types::K_FALSE;
     };
 
-    class iApplication : public cObject
+    class iApplication : public iObject
     {
         REALWARE_OBJECT(iApplication)
 

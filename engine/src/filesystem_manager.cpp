@@ -15,7 +15,7 @@ using namespace types;
 
 namespace harpy
 {
-    cDataFile::cDataFile(cContext* context) : cObject(context) {}
+    cDataFile::cDataFile(cContext* context) : iObject(context) {}
 
     cDataFile::~cDataFile()
     {
@@ -46,7 +46,7 @@ namespace harpy
         inputFile.read((char*)&_data[0], byteSize);
     }
 
-    cFileSystem::cFileSystem(cContext* context) : cObject(context) {}
+    cFileSystem::cFileSystem(cContext* context) : iObject(context) {}
 
     cDataFile* cFileSystem::CreateDataFile(const std::string& path, types::boolean isText)
     {

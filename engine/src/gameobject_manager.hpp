@@ -24,7 +24,7 @@ namespace harpy
     struct sTransform;
     struct sText;
     
-    class cGameObject : public cObject
+    class cGameObject : public iObject
     {
         REALWARE_OBJECT(cGameObject)
 
@@ -74,7 +74,7 @@ namespace harpy
         cPhysicsController* _controller = nullptr;
     };
 
-    class mGameObject : public cObject
+    class mGameObject : public iObject
     {
     public:
         explicit mGameObject(cContext* context);

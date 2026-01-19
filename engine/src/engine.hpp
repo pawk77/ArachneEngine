@@ -25,7 +25,7 @@ namespace harpy
 		types::usize maxSoundCount = 65536;
 	};
 
-	class cEngine : public cObject
+	class cEngine : public iObject
 	{
 		REALWARE_OBJECT(cEngine)
 

@@ -30,7 +30,7 @@ namespace harpy
         void* _bitmapData = nullptr;
     };
 
-    class cFontFace : public cObject
+    class cFontFace : public iObject
     {
         REALWARE_OBJECT(cFontFace)
 
@@ -64,7 +64,7 @@ namespace harpy
         cTexture* _atlas = nullptr;
     };
 
-    class cText : public cObject
+    class cText : public iObject
     {
         REALWARE_OBJECT(cText)
 
@@ -80,7 +80,7 @@ namespace harpy
         std::string _text = "";
     };
 
-    class cFont : public cObject
+    class cFont : public iObject
     {
         REALWARE_OBJECT(cFont)
 
