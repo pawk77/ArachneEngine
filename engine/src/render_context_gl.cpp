@@ -18,7 +18,7 @@
 
 using namespace types;
 
-namespace arachne
+namespace harpy
 {
     void APIENTRY GLDebugCallback(
         GLenum source,

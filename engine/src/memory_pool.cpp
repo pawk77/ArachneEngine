@@ -9,7 +9,7 @@
 
 using namespace types;
 
-namespace arachne
+namespace harpy
 {
 	cMemoryAllocator::~cMemoryAllocator()
 	{

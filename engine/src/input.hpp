@@ -10,7 +10,7 @@
 
 struct GLFWwindow;
 
-namespace arachne
+namespace harpy
 {
 	class cContext;
 

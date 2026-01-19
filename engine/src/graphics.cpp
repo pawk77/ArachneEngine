@@ -21,7 +21,7 @@
 #include "render_context.hpp"
 #include "log.hpp"
 
-namespace arachne
+namespace harpy
 {
     sTransform::sTransform(const cGameObject* gameObject)
     {

@@ -9,7 +9,7 @@
 
 using namespace types;
 
-namespace arachne
+namespace harpy
 {
     cEventHandler::cEventHandler(eEventType type, cGameObject* receiver, EventFunction&& function) : _receiver(receiver), _type(type), _function(std::make_shared<EventFunction>(std::move(function))) {}
 

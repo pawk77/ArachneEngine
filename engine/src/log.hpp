@@ -4,7 +4,7 @@
 
 #include <iostream>
 
-namespace arachne
+namespace harpy
 {
 	template<typename T>
 	void Print(const T& message)

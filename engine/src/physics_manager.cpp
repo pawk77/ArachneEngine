@@ -14,7 +14,7 @@
 using namespace physx;
 using namespace types;
 
-namespace arachne
+namespace harpy
 {
     PxFilterFlags FilterShader(
         PxFilterObjectAttributes attributes0, PxFilterData filterData0,

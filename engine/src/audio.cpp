@@ -9,7 +9,7 @@
 
 using namespace types;
 
-namespace arachne
+namespace ladon
 {
 	cSound::cSound(cContext* context) : cObject(context), _audioBackend(context->GetSubsystem<cAudio>()->GetAPI()) {}
 

@@ -4,7 +4,7 @@
 
 #include "types.hpp"
 
-namespace arachne
+namespace harpy
 {
     namespace core
     {

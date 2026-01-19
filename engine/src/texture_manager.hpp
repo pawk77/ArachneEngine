@@ -9,7 +9,7 @@
 #include "object.hpp"
 #include "types.hpp"
 
-namespace arachne
+namespace harpy
 {
     class cContext;
     class iGraphicsAPI;

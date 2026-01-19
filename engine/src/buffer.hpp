@@ -5,7 +5,7 @@
 #include "object.hpp"
 #include "types.hpp"
 
-namespace arachne
+namespace ladon
 {
     class cDataBuffer : public cObject
     {

@@ -25,7 +25,7 @@ namespace physx
     class PxPhysics;
 }
 
-namespace arachne
+namespace harpy
 {
     class cApplication;
     class cGameObject;

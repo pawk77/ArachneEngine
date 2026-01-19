@@ -7,7 +7,7 @@
 
 using namespace types;
 
-namespace arachne
+namespace harpy
 {
     mSound::mSound(cContext* context, iSoundContext* soundContext) : cObject(context), _soundContext(soundContext), _sounds(app) {}
 

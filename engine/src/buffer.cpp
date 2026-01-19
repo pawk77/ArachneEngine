@@ -4,7 +4,7 @@
 
 #include "buffer.hpp"
 
-namespace arachne
+namespace ladon
 {
     cDataBuffer::cDataBuffer(cContext* context) : cObject(context) {}
 

@@ -2,7 +2,7 @@
 
 #include "time.hpp"
 
-namespace arachne
+namespace harpy
 {
 	cTime::cTime(cContext* context) : cObject(context) {}
 

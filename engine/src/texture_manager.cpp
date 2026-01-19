@@ -12,7 +12,7 @@
 
 using namespace types;
 
-namespace arachne
+namespace harpy
 {
     cTextureAtlasTexture::cTextureAtlasTexture(cContext* context, types::boolean isNormalized, const glm::vec3& offset, const glm::vec2& size, cTexture* atlas = nullptr) : cObject(context), _isNormalized(isNormalized)
     {

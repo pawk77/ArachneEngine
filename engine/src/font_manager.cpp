@@ -13,7 +13,7 @@
 
 using namespace types;
 
-namespace arachne
+namespace harpy
 {
     usize CalculateNewlineOffset(cFontFace* font)
     {

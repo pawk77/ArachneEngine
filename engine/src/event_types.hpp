@@ -1,6 +1,6 @@
 // event_types.hpp
 
-namespace arachne
+namespace harpy
 {
     enum class eEventType
     {

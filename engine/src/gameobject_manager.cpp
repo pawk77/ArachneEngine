@@ -8,7 +8,7 @@
 
 using namespace types;
 
-namespace arachne
+namespace harpy
 {
     cGameObject::cGameObject(cContext* context) : cObject(context)
     {

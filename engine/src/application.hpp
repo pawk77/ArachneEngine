@@ -11,7 +11,7 @@
 #include "../../thirdparty/glm/glm/glm.hpp"
 #include "types.hpp"
 
-namespace arachne
+namespace ladon
 {
     class iRenderContext;
     class iSoundContext;

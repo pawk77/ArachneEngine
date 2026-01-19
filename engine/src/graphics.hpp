@@ -9,7 +9,7 @@
 #include "id_vec.hpp"
 #include "types.hpp"
 
-namespace arachne
+namespace harpy
 {
 	class cWindow;
 	class iGraphicsAPI;
