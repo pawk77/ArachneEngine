@@ -1,6 +1,4 @@
-# Harpy Engine
-
-![Harpy Engine Logo](HarpyLogo.png)
+# Triton Engine
 
 High-performance C++11 game engine.
 
