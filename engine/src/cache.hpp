@@ -29,13 +29,13 @@ namespace triton
 		inline types::usize GetElementCount() const { return _objects->GetElementCount(); }
 
 	private:
-		cMap<T>* _objects = nullptr;
+		cCache<T>* _objects = nullptr;
 	};
 
 	template <typename T>
 	cCache<T>::cCache(cContext* context, const sChunkAllocatorDescriptor& allocatorDesc) : iObject(context)
 	{
-		_objects = _context->Create<cMap<T>>(_context, allocatorDesc);
+		_objects = _context->Create<cCache<T>>(_context, allocatorDesc);
 	}
 
 	template <typename T>
