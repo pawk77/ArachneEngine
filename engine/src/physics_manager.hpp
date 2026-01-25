@@ -107,19 +107,26 @@ namespace triton
         physx::PxMaterial* _material = nullptr;
     };
 
+    class cPhysicsControllerBackend
+    {
+        friend class cPhysics;
+
+        physx::PxController* controller = nullptr;
+    };
+
     class cPhysicsController : public iObject
     {
         TRITON_OBJECT(cPhysicsController)
 
     public:
-        explicit cPhysicsController(cContext* context, physx::PxController* controller, types::f32 eyeHeight) : iObject(context), _controller(controller), _eyeHeight(eyeHeight) {}
+        explicit cPhysicsController(cContext* context, cPhysicsControllerBackend* controller, types::f32 eyeHeight);
         ~cPhysicsController() = default;
 
-        inline physx::PxController* GetController() const { return _controller; }
+        inline cPhysicsControllerBackend* GetController() const { return _controllerBackend; }
         inline types::f32 GetEyeHeight() const { return _eyeHeight; }
 
     private:
-        physx::PxController* _controller = nullptr;
+        cPhysicsControllerBackend* _controllerBackend = nullptr;
         types::f32 _eyeHeight = 0.0f;
     };
 
@@ -151,8 +158,8 @@ namespace triton
 
         cPhysicsScene* CreateScene(const std::string& id, const glm::vec3& gravity = glm::vec3(0.0f, -9.81f, 0.0f));
         cPhysicsMaterial* CreateMaterial(const std::string& id, const glm::vec3& params = glm::vec3(0.5f, 0.5f, 0.6f));
-        cPhysicsActor* CreateActor(const std::string& id, eCategory staticOrDynamic, eCategory shapeType, const cPhysicsScene* scene, const cPhysicsMaterial* material, types::f32 mass, const sTransform* transform, cGameObject* gameObject);
-        cPhysicsController* CreateController(const std::string& id, types::f32 eyeHeight, types::f32 height, types::f32 radius, const sTransform* transform, const glm::vec3& up, const cPhysicsScene* scene, const cPhysicsMaterial* material);
+        cPhysicsActor* CreateActor(const std::string& id, eCategory staticOrDynamic, eCategory shapeType, const cPhysicsScene* scene, const cPhysicsMaterial* material, types::f32 mass, const cTransform* transform, cGameObject* gameObject);
+        cPhysicsController* CreateController(const std::string& id, types::f32 eyeHeight, types::f32 height, types::f32 radius, const cTransform* transform, const cVector3& up, const cPhysicsScene* scene, const cPhysicsMaterial* material);
         cPhysicsScene* FindScene(const std::string&);
         cPhysicsMaterial* FindMaterial(const std::string&);
         cPhysicsActor* FindActor(const std::string&);

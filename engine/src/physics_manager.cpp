@@ -2,7 +2,6 @@
 
 #include <windows.h>
 #include <cooking/PxCooking.h>
-#include "../../thirdparty/glm/glm/gtc/quaternion.hpp"
 #include "application.hpp"
 #include "context.hpp"
 #include "time.hpp"
@@ -33,6 +32,8 @@ namespace triton
 
         return PxFilterFlag::eDEFAULT;
     }
+
+    cPhysicsController::cPhysicsController(cContext* context, cPhysicsControllerBackend* controller, types::f32 eyeHeight) : iObject(context), _controllerBackend(controller), _eyeHeight(eyeHeight) {}
 
     cPhysics::cPhysics(cContext* context) :
         iObject(context),
@@ -97,19 +98,19 @@ namespace triton
         return _materials->Add(id, _context, material);
     }
 
-    cPhysicsController* cPhysics::CreateController(const std::string& id, f32 eyeHeight, f32 height, f32 radius, const sTransform* transform, const glm::vec3& up, const cPhysicsScene* scene, const cPhysicsMaterial* material)
+    cPhysicsController* cPhysics::CreateController(const std::string& id, f32 eyeHeight, f32 height, f32 radius, const cTransform* transform, const cVector3& up, const cPhysicsScene* scene, const cPhysicsMaterial* material)
     {
-        const glm::vec3 position = transform->_position;
+        const cVector3 position = transform->GetPosition();
 
         PxCapsuleControllerDesc desc;
         desc.setToDefault();
         desc.height = height;
         desc.radius = radius;
-        desc.position = PxExtendedVec3(position.y, position.x, position.z);
+        desc.position = PxExtendedVec3(position.GetY(), position.GetX(), position.GetZ());
         desc.stepOffset = 0.5f;
         desc.slopeLimit = cosf(PxPi / 4.0f);
         desc.contactOffset = 0.01f;
-        desc.upDirection = PxVec3(up.y, up.x, up.z);
+        desc.upDirection = PxVec3(up.GetY(), up.GetX(), up.GetZ());
         desc.material = material->GetMaterial();
 
         PxController* controller = scene->GetControllerManager()->createController(desc);
@@ -117,18 +118,18 @@ namespace triton
         return _controllers->Add(id, _context, controller, eyeHeight);
     }
 
-    cPhysicsActor* cPhysics::CreateActor(const std::string& id, eCategory staticOrDynamic, eCategory shapeType, const cPhysicsScene* scene, const cPhysicsMaterial* material, f32 mass, const sTransform* transform, cGameObject* gameObject)
+    cPhysicsActor* cPhysics::CreateActor(const std::string& id, eCategory staticOrDynamic, eCategory shapeType, const cPhysicsScene* scene, const cPhysicsMaterial* material, f32 mass, const cTransform* transform, cGameObject* gameObject)
     {
-        const glm::vec3 position = transform->_position;
-        const glm::vec3 scale = transform->_scale;
+        const cVector3 position = transform->GetPosition();
+        const cVector3 scale = transform->GetScale();
 
-        PxTransform pose(PxVec3(position.y, position.x, position.z));
+        PxTransform pose(PxVec3(position.GetY(), position.GetX(), position.GetZ()));
             
         PxShape* shape = nullptr;
         if (shapeType == eCategory::PHYSICS_SHAPE_PLANE)
             shape = _physics->createShape(PxPlaneGeometry(), *material->GetMaterial(), false, PxShapeFlag::eSIMULATION_SHAPE | PxShapeFlag::eSCENE_QUERY_SHAPE);
         else if (shapeType == eCategory::PHYSICS_SHAPE_BOX)
-            shape = _physics->createShape(PxBoxGeometry(scale.y * 0.5f, scale.x * 0.5f, scale.z * 0.5f), *material->GetMaterial(), false, PxShapeFlag::eSIMULATION_SHAPE | PxShapeFlag::eSCENE_QUERY_SHAPE);
+            shape = _physics->createShape(PxBoxGeometry(scale.GetY() * 0.5f, scale.GetX() * 0.5f, scale.GetZ() * 0.5f), *material->GetMaterial(), false, PxShapeFlag::eSIMULATION_SHAPE | PxShapeFlag::eSCENE_QUERY_SHAPE);
 
         if (shape == nullptr)
             return nullptr;
@@ -205,7 +206,7 @@ namespace triton
         cTime* time = _context->GetSubsystem<cTime>();
         const f32 deltaTime = time->GetDeltaTime();
 
-        PxController* pxController = controller->GetController();
+        PxController* pxController = controller->GetController()->controller;
 
         PxControllerFilters filters = PxControllerFilters();
         pxController->move(
@@ -218,7 +219,7 @@ namespace triton
 
     glm::vec3 cPhysics::GetControllerPosition(const cPhysicsController* controller)
     {
-        PxController* pxController = controller->GetController();
+        PxController* pxController = controller->GetController()->controller;
         const PxExtendedVec3 position = pxController->getPosition();
 
         return glm::vec3(position.y, position.x + controller->GetEyeHeight(), position.z);
@@ -235,22 +236,22 @@ namespace triton
             if (actor.GetActorType() != eCategory::PHYSICS_ACTOR_DYNAMIC)
                 continue;
 
-            sTransform* transform = actor.GetGameObject()->GetTransform();
+            cTransform* transform = actor.GetGameObject()->GetTransform();
             const PxActor* pxActor = actor.GetActor();
 
             const PxTransform actorTransform = ((PxRigidDynamic*)pxActor)->getGlobalPose();
-            const glm::quat q = glm::quat(
+            const cQuaternion q = cQuaternion(
                 actorTransform.q.w,
                 actorTransform.q.x,
                 actorTransform.q.y,
                 actorTransform.q.z
             );
-            const glm::vec3 actorEuler = glm::eulerAngles(q);
+            const cVector3 actorEuler = q.EulerAngles();
 
             {
                 std::lock_guard<std::mutex> lock(_mutex);
-                transform->_position = glm::vec3(actorTransform.p.y, actorTransform.p.x, actorTransform.p.z);
-                transform->_rotation = glm::vec3(actorEuler.y, actorEuler.x, actorEuler.z);
+                transform->SetPosition(cVector3(actorTransform.p.y, actorTransform.p.x, actorTransform.p.z));
+                transform->SetRotation(cVector3(actorEuler.GetY(), actorEuler.GetX(), actorEuler.GetZ()));
             }
         }
 
