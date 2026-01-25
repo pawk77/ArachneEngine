@@ -4,17 +4,17 @@ using namespace types;
 
 namespace triton
 {
-	cTag::cTag(cContext* context) : iObject(context)
+	cTag::cTag()
 	{
 		FillZeros();
 	}
 
-	cTag::cTag(cContext* context, const std::string& text) : cTag(context)
+	cTag::cTag(const std::string& text) : cTag(context)
 	{
 		CopyChars((const u8*)text.c_str(), text.size());
 	}
 
-	cTag::cTag(cContext* context, const u8* chars, usize charsByteSize) : cTag(context)
+	cTag::cTag(const u8* chars, usize charsByteSize) : cTag(context)
 	{
 		CopyChars(chars, charsByteSize);
 	}
